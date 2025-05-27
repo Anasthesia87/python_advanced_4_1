@@ -51,7 +51,7 @@ def test_api_single_user_status_code_200(user_id):
 ])
 def test_api_single_user_validate_response_schema(user_id):
     #url = f"https://reqres.in/api/users/{user_id}"
-    url = f"http://127.0.0.1/:8000/api/users/{user_id}"
+    url = f"http://127.0.0.1:8000/api/users/{user_id}"
     headers = {'x-api-key': 'reqres-free-v1'}
     response = requests.get(url, headers=headers)
     body = response.json()
@@ -59,14 +59,16 @@ def test_api_single_user_validate_response_schema(user_id):
 
 
 def test_api_list_resource_status_code_200():
-    url = "https://reqres.in/api/unknown"
+    #url = "https://reqres.in/api/unknown"
+    url = f"http://127.0.0.1:8000/api/unknown"
     headers = {'x-api-key': 'reqres-free-v1'}
     response = requests.get(url, headers=headers)
     assert response.status_code == 200
 
 
 def test_api_list_resource_response_not_empty():
-    url = "https://reqres.in/api/unknown"
+    #url = "https://reqres.in/api/unknown"
+    url = f"http://127.0.0.1:8000/api/unknown"
     headers = {'x-api-key': 'reqres-free-v1'}
     response = requests.get(url, headers=headers)
     data = response.json()
@@ -74,7 +76,8 @@ def test_api_list_resource_response_not_empty():
 
 
 def test_api_list_resource_validate_response_schema():
-    url = "https://reqres.in/api/unknown"
+    #url = "https://reqres.in/api/unknown"
+    url = f"http://127.0.0.1:8000/api/unknown"
     headers = {'x-api-key': 'reqres-free-v1'}
     response = requests.get(url, headers=headers)
     body = response.json()
