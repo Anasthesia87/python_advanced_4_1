@@ -2,7 +2,7 @@ import pytest
 import requests
 from jsonschema import validate
 
-from schemas import (get_list_user_schema, get_single_user_schema, get_list_resource_schema, create_user_schema)
+from schemas import (get_list_user_schema, get_single_user_schema, get_list_resource_schema)
 
 
 @pytest.mark.parametrize("page_number", [
