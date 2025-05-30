@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from fastapi.responses import Response
 
 app = FastAPI()
 
@@ -11,9 +12,29 @@ class UserData(BaseModel):
     last_name: str
     avatar: str
 
-class UserDataCreate(BaseModel):
+
+class UserDataCreateBody(BaseModel):
     name: str
     job: str
+
+
+class UserDataUpdateBody(BaseModel):
+    name: str
+    job: str
+
+
+class UserDataCreateResponse(BaseModel):
+    name: str
+    job: str
+    id: str
+    createdAt: str
+
+
+class UserDataUpdateResponse(BaseModel):
+    name: str
+    job: str
+    updatedAt: str
+
 
 class ResourceData(BaseModel):
     id: int
@@ -208,9 +229,45 @@ def get_list_resource():
         "support": resource_data["support"],
     }
 
-@app.post("/api/users")
-def create_user(user: UserDataCreate):
-    return user
+
+@app.post("/api/users", response_model=UserDataCreateResponse, status_code=201)
+def create_user(user: UserDataCreateBody):
+    if not user.name or not user.job:
+        raise HTTPException(status_code=400, detail="Name and job are required")
+
+    return {
+        "name": user.name,
+        "job": user.job,
+        "id": "409",
+        "createdAt": "2025-05-30T08:46:33.132Z"
+    }
+
+
+@app.put("/api/users/{user_id}", response_model=UserDataUpdateResponse)
+def update_user_put(user: UserDataUpdateBody):
+    return {
+        "name": user.name,
+        "job": user.job,
+        "updatedAt": "2025-05-30T09:58:46.242Z"
+    }
+
+
+@app.patch("/api/users/{user_id}", response_model=UserDataUpdateResponse)
+def update_user_patch(user: UserDataUpdateBody):
+    return {
+        "name": user.name,
+        "job": user.job,
+        "updatedAt": "2025-05-30T10:29:24.851Z"
+    }
+
+
+@app.delete("/api/users/{user_id}")
+def delete_user(user_id: int):
+    if user_id not in users:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return Response(status_code=204)
+
 
 if __name__ == "__main__":
     import uvicorn

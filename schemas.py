@@ -469,3 +469,73 @@ get_list_resource_schema = {
   ]
 }
 
+create_user_schema = {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": True,
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "job": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string"
+        },
+        "createdAt": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "job",
+        "id",
+        "createdAt"
+    ]
+}
+
+update_put_user_schema = {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": True,
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "job": {
+            "type": "string"
+        },
+        "updatedAt": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "job",
+        "updatedAt"
+    ]
+}
+
+update_patch_user_schema = {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "job": {
+            "type": "string"
+        },
+        "updatedAt": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "job",
+        "updatedAt"
+    ]
+}
+
+
